@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base href="https://febsinfo.com.br/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FEBSINFO - Suporte Técnico e Soluções Inovadoras</title>
+  <!-- Importação da fonte Inter do Google Fonts para um visual moderno e legível -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Importação do Font Awesome para ícones (WhatsApp) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Variáveis CSS para cores padrão da página: Laranja e Preto */
+    :root {
+      --preto: #000000;
+      --warm-red: #FF4500; /* Laranja vibrante */
+      --branco: #FFFFFF;
+      --cinza-escuro: #1a1a1a; /* Para fundos de seções e cards */
+      --cinza-claro: #cccccc; /* Para texto secundário */
+      --verde-whatsapp: #25D366;
+      --verde-whatsapp-hover: #1DA851;
+    }
+    
+    /* Estilos globais do corpo */
+    body {
+      font-family: 'Inter', sans-serif; /* Usando Inter como fonte principal */
+      margin: 0;
+      padding: 0;
+      background-color: var(--preto);
+      color: var(--branco);
+      line-height: 1.6; /* Melhor legibilidade */
+      overflow-x: hidden; /* Evita rolagem horizontal */
+    }
+
+    /* Estilos de elementos de seção */
+    section {
+      padding: clamp(60px, 10vw, 100px) 4%; /* Padding responsivo para seções */
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: clamp(32px, 5vw, 48px); /* Tamanho de fonte responsivo para títulos de seção */
+      color: var(--warm-red);
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    section p {
+      font-size: clamp(16px, 2.5vw, 18px); /* Tamanho de fonte responsivo para parágrafos de seção */
+      max-width: 800px;
+      margin: 0 auto 40px;
+      color: var(--cinza-claro);
+    }
+    
+    /* Estilos do cabeçalho fixo */
+    header {
+      background-color: rgba(0, 0, 0, 0.95); /* Quase opaco */
+      padding: 15px 4%; /* Padding responsivo para o cabeçalho */
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px); /* Efeito de desfoque mais intenso */
+      box-shadow: 0 4px 20px rgba(255, 69, 0, 0.15); /* Sombra mais pronunciada */
+    }
+    
+    /* Estilos da navegação */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Estilos do logo */
+    .logo {
+      font-size: clamp(24px, 4vw, 28px); /* Tamanho de fonte responsivo para o logo */
+      font-weight: 800; /* Mais negrito */
+      color: var(--warm-red);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Animação de pulso mais suave */
+    }
+
+    /* Animação de pulso para o logo */
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.04);
+        opacity: 0.9;
+      }
+    }
+
+    /* Estilos do menu de navegação */
+    .menu {
+      display: flex;
+      gap: clamp(15px, 3vw, 30px); /* Espaçamento responsivo */
+    }
+    
+    /* Estilos dos links do menu */
+    .menu a {
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 600; /* Mais negrito */
+      transition: all 0.3s ease-in-out;
+      padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px); /* Padding responsivo */
+      border-radius: 30px; /* Mais arredondado */
+      position: relative;
+      overflow: hidden;
+      font-size: clamp(15px, 2.5vw, 17px); /* Tamanho de fonte responsivo */
+      text-transform: uppercase;
+    }
+    
+    /* Efeito de preenchimento ao passar o mouse nos links do menu */
+    .menu a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: var(--warm-red);
+      transition: left 0.3s ease-out;
+      z-index: -1;
+      border-radius: 30px;
+    }
+    
+    .menu a:hover::before {
+      left: 0;
+    }
+    
+    .menu a:hover {
+      color: var(--branco);
+      transform: translateY(-3px); /* Elevação mais notável */
+      box-shadow: 0 5px 15px rgba(255,69,0,0.3);
+    }
+
+    /* Estilo para o item de menu ativo */
+    .menu a.active {
+      color: var(--branco);
+      background-color: var(--warm-red);
+      transform: translateY(-2px);
+      box-shadow: 0 3px 10px rgba(255,69,0,0.5);
+    }
+    
+    /* Estilos da seção Hero */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--branco);
+      position: relative;
+      overflow: hidden;
+      padding: 0 4%; /* Padding responsivo */
+    }
+    
+    /* Conteúdo da seção Hero */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 64px); /* Tamanho de fonte responsivo para o título principal */
+      margin-bottom: clamp(15px, 3vw, 25px);
+      color: var(--warm-red);
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    
+    .hero p {
+      font-size: clamp(20px, 4vw, 28px); /* Tamanho de fonte responsivo para o parágrafo principal */
+      margin: 0 auto clamp(20px, 5vw, 40px);
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+      font-weight: 300;
+      color: var(--branco);
+    }
+
+    /* Estilos da seção "Sobre Nós" */
+    .about-us {
+      background-color: var(--cinza-escuro);
+      border-radius: 15px;
+      padding: clamp(40px, 8vw, 60px) clamp(20px, 5vw, 40px); /* Padding responsivo */
+      margin-top: 60px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .about-us h2 {
+      font-size: clamp(32px, 5vw, 38px); /* Tamanho de fonte responsivo */
+    }
+
+    .about-us p {
+      font-size: clamp(16px, 2.5vw, 18px); /* Tamanho de fonte responsivo */
+      color: var(--cinza-claro);
+      line-height: 1.8;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* Estilos da seção de serviços */
+    .services-grid {
+      display: grid; /* Usando Grid para o layout dos cards */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsivo */
+      gap: clamp(20px, 4vw, 30px); /* Espaçamento responsivo entre os cards */
+      margin-top: 60px;
+    }
+    
+    /* Estilos dos cards de serviço */
+    .service-card {
+      background-color: var(--cinza-escuro);
+      border: 2px solid var(--warm-red);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(255,69,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-align: left; /* Alinha texto à esquerda dentro do card */
+    }
+    
+    .service-card:hover {
+      transform: translateY(-15px) scale(1.03); /* Elevação mais dramática */
+      box-shadow: 0 20px 40px rgba(255,69,0,0.5); /* Sombra mais intensa no hover */
+    }
+    
+    .service-card img {
+      width: 100%;
+      height: clamp(180px, 30vw, 220px); /* Altura responsiva para imagens */
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    
+    .service-card:hover img {
+      transform: scale(1.08); /* Zoom mais notável */
+      filter: brightness(1.05); /* Brilho sutil */
+    }
+
+    .service-card-content {
+      padding: clamp(20px, 4vw, 25px); /* Padding interno responsivo */
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-card h3 {
+      margin-top: 0;
+      color: var(--warm-red);
+      font-size: clamp(20px, 3.5vw, 24px); /* Tamanho de fonte responsivo */
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .service-card p {
+      font-size: clamp(14px, 2.2vw, 16px); /* Tamanho de fonte responsivo */
+      color: var(--cinza-claro);
+      margin-bottom: 0; /* Remove margem inferior padrão */
+      text-align: left; /* Garante alinhamento à esquerda */
+    }
+    
+    /* Estilos da seção de contato (WhatsApp) - Aprimorada */
+    .whatsapp-contact {
+      background: linear-gradient(45deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+      background-size: cover;
+      border: 3px solid var(--warm-red); /* Borda mais grossa */
+      border-radius: 20px; /* Mais arredondado */
+      box-shadow: 0 15px 40px rgba(255,69,0,0.5); /* Sombra mais forte */
+      padding: clamp(40px, 8vw, 60px) clamp(20px, 5vw, 40px); /* Padding responsivo */
+      margin-top: 80px; 
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Overlay sutil para a seção de contato para melhor contraste */
+    .whatsapp-contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,69,0,0.08); /* Um toque de cor mais visível */
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .whatsapp-contact > * { 
+      position: relative;
+      z-index: 2;
+    }
+    
+    .whatsapp-contact h2 {
+      font-size: clamp(36px, 6vw, 48px); /* Título maior e mais impactante */
+      margin-bottom: 25px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .whatsapp-contact p {
+      font-size: clamp(18px, 3vw, 22px); /* Texto maior e mais convidativo */
+      margin-bottom: 40px;
+      max-width: 700px; /* Maior largura para o parágrafo */
+      color: var(--branco);
+    }
+    
+    .whatsapp-button {
+      background-color: var(--verde-whatsapp);
+      color: var(--branco);
+      border: none;
+      padding: clamp(15px, 3vw, 18px) clamp(30px, 6vw, 40px); /* Maior padding no botão */
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      font-size: clamp(18px, 3vw, 22px); /* Maior fonte no botão */
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: inline-flex; 
+      align-items: center;
+      gap: clamp(10px, 2vw, 15px); /* Mais espaçamento entre ícone e texto */
+      text-decoration: none; 
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5); /* Sombra mais pronunciada */
+    }
+    
+    .whatsapp-button:hover {
+      background-color: var(--verde-whatsapp-hover);
+      transform: translateY(-5px); /* Elevação mais notável */
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-button i {
+      font-size: clamp(22px, 4vw, 28px); /* Tamanho do ícone do WhatsApp responsivo */
+    }
+    
+    /* Estilos do rodapé */
+    footer {
+      background-color: var(--preto);
+      color: var(--cinza-claro);
+      text-align: center;
+      padding: clamp(20px, 4vw, 30px); /* Padding responsivo */
+      margin-top: 80px;
+      border-top: 2px solid var(--warm-red);
+      font-size: clamp(13px, 2vw, 15px); /* Tamanho de fonte responsivo */
+    }
+
+    /* Media Queries para responsividade - Ajustadas para maior fluidez */
+    @media screen and (max-width: 1024px) {
+      .service-card {
+        flex: 1 1 calc(50% - clamp(20px, 4vw, 30px)); /* Dois cards por linha em telas médias */
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      header {
+        padding: 10px 4%;
+      }
+      .menu {
+        gap: clamp(10px, 2vw, 15px);
+      }
+      .menu a {
+        padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2.5vw, 12px);
+      }
+      .hero {
+        height: 80vh;
+      }
+      .service-card {
+        flex: 1 1 100%; /* Um card por linha em telas menores */
+        max-width: 400px; /* Limita a largura em telas muito pequenas */
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .menu {
+        flex-direction: column; /* Menu em coluna em telas muito pequenas */
+        gap: 10px;
+        align-items: flex-end; /* Alinha itens à direita */
+      }
+      .menu a {
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">FEBSINFO</div>
+      <div class="menu">
+        <a href="#home" data-section="home">Home</a>
+        <a href="#about" data-section="about">Sobre Nós</a>
+        <a href="#services" data-section="services">Serviços</a>
+        <a href="#contact" data-section="contact">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>FEBSINFO: Inovação e Suporte Técnico de Ponta</h1>
+        <p>Sua parceria estratégica em soluções de TI para um futuro conectado e eficiente.</p>
+      </div>
+    </section>
+
+    <section id="about" class="about-us">
+      <h2>Sobre a FEBSINFO</h2>
+      <p>Na FEBSINFO, somos apaixonados por tecnologia e dedicados a impulsionar o sucesso dos nossos clientes. Com anos de experiência, oferecemos suporte técnico especializado e soluções inovadoras em TI, garantindo que sua infraestrutura tecnológica seja robusta, segura e sempre atualizada. Nosso compromisso é com a excelência e a satisfação, transformando desafios em oportunidades através da tecnologia.</p>
+    </section>
+
+    <section id="services">
+      <h2>Nossos Serviços Especializados</h2>
+      <p>Oferecemos um portfólio completo de serviços para atender todas as suas necessidades em tecnologia, com foco em eficiência e resultados.</p>
+      <div class="services-grid">
+        <div class="service-card" data-service="infraestrutura">
+          <img alt="Infraestrutura de TI: Servidores e racks modernos em um data center iluminado por luzes azuis, simbolizando a complexidade e a organização da infraestrutura de rede." src="https://images.unsplash.com/photo-1581093557454-e0545f4d8123?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://placehold.co/300x220/000000/FFFFFF?text=Infraestrutura+TI';" width="300" height="220">
+          <div class="service-card-content">
+            <h3>Infraestrutura de TI</h3>
+            <p>Projetamos, implementamos e gerenciamos infraestruturas de rede e servidores, garantindo alta disponibilidade e segurança para seus dados.</p>
+          </div>
+        </div>
+        <div class="service-card" data-service="desktops-notebooks">
+          <img alt="Desktops e Notebooks: Uma pessoa trabalhando em um notebook moderno com múltiplas telas, representando produtividade e suporte a dispositivos de usuário final." src="https://images.unsplash.com/photo-1547082299-de196ea01fe9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://placehold.co/300x220/000000/FFFFFF?text=Desktops+Notebooks';" width="300" height="220">
+          <div class="service-card-content">
+            <h3>Suporte para Desktops e Notebooks</h3>
+            <p>Manutenção preventiva e corretiva, otimização de desempenho e soluções rápidas para garantir que seus equipamentos funcionem sem interrupções.</p>
+          </div>
+        </div>
+        <div class="service-card" data-service="organizacao-racks">
+          <img alt="Organização de Racks: Um rack de servidor com cabos coloridos perfeitamente organizados, destacando a importância da gestão de cabos para eficiência e manutenção." src="https://images.unsplash.com/photo-1587560410050-61266e744f4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://placehold.co/300x220/000000/FFFFFF?text=Organização+Racks';" width="300" height="220">
+          <div class="service-card-content">
+            <h3>Organização e Otimização de Racks</h3>
+            <p>Melhore a performance e a segurança do seu ambiente de TI com a organização profissional e otimização de seus racks e equipamentos.</p>
+          </div>
+        </div>
+        <div class="service-card" data-service="cabeamento-estruturado">
+          <img alt="Cabeamento Estruturado: Detalhe de cabos de fibra óptica e conectores em um painel de rede, representando a base de uma conexão de alta velocidade e confiável." src="https://images.unsplash.com/photo-1571171616537-526e077a28e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://placehold.co/300x220/000000/FFFFFF?text=Cabeamento+Estruturado';" width="300" height="220">
+          <div class="service-card-content">
+            <h3>Cabeamento Estruturado Avançado</h3>
+            <p>Implementamos soluções de cabeamento de alto desempenho, garantindo conectividade rápida, estável e escalável para sua empresa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="whatsapp-contact">
+      <h2>Pronto para Impulsionar Seu Negócio?</h2>
+      <p>Entre em contato conosco agora mesmo para solicitar um orçamento, agendar uma visita técnica ou tirar suas dúvidas. Estamos prontos para oferecer as melhores soluções em TI para você!</p>
+      <a href="https://wa.me/5585986972332?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20FEBSINFO." target="_blank" class="whatsapp-button">
+        <i class="fab fa-whatsapp"></i> Converse Conosco no WhatsApp
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 FEBSINFO - Todos os direitos reservados</p>
+  </footer>
+
+  <!-- GSAP para animações -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animações com GSAP para elementos aparecerem suavemente
+    gsap.from('.hero-content', {opacity: 0, y: 50, duration: 1.5, ease: "power3.out"});
+    
+    gsap.from('.about-us', {
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: '.about-us',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    gsap.from('.service-card', {
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: '.services-grid',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    gsap.from('.whatsapp-contact', {
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: '.whatsapp-contact',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    // Animação do logo para um efeito dinâmico contínuo
+    gsap.to('.logo', {
+      duration: 2,
+      scale: 1.04,
+      yoyo: true,
+      repeat: -1,
+      ease: "power1.inOut"
+    });
+
+    // Animação das imagens dos serviços ao passar o mouse
+    gsap.utils.toArray('.service-card img').forEach(img => {
+      gsap.to(img, {
+        scale: 1.08,
+        duration: 0.4,
+        paused: true
+      });
+      
+      img.parentElement.addEventListener('mouseenter', () => gsap.to(img, {scale: 1.08}));
+      img.parentElement.addEventListener('mouseleave', () => gsap.to(img, {scale: 1}));
+    });
+
+    // Menu interativo para rolagem suave para as seções
+    const menuItems = document.querySelectorAll('.menu a');
+    menuItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 80, /* Ajusta a posição para o cabeçalho fixo */
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Efeito parallax na hero section para profundidade visual
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      const parallaxSpeed = 0.4; /* Ajuste para um efeito mais sutil */
+      hero.style.backgroundPositionY = -(scrolled * parallaxSpeed) + 'px';
+    });
+
+    // Interatividade nos cards de serviço para rolar para a seção de contato
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+      card.addEventListener('click', function() {
+        document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+      });
+    });
+
+    // Highlight do menu ativo conforme a rolagem da página
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        // Ajusta a detecção da seção ativa com base na posição de rolagem
+        if (pageYOffset >= sectionTop - sectionHeight / 3) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
